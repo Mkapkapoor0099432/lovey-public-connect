@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useI18n } from "../i18n";
-import { CATEGORY_SLUGS, DOC_TYPES, MAX_FILE_BYTES, MOBILE_RE, PHOTO_TYPES, WARDS, WARD_UNKNOWN, type CategorySlug } from "../../shared/constants";
+import { DOC_TYPES, MAX_FILE_BYTES, MOBILE_RE, PHOTO_TYPES, WARDS, WARD_UNKNOWN, type CategorySlug } from "../../shared/constants";
 
 declare global { interface Window { turnstile?: { render: (el: HTMLElement, o: Record<string, unknown>) => string; reset: (id?: string) => void } } }
 
@@ -9,8 +9,8 @@ const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
 const sb = import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY
   ? createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY) : null;
 
-type V = { name: string; mobile: string; area: string; ward: string; catText: string; subject: string; description: string; consent: boolean };
-const empty: V = { name: "", mobile: "", area: "", ward: "", catText: "", subject: "", description: "", consent: false };
+type V = { name: string; mobile: string; area: string; ward: string; subject: string; description: string; consent: boolean };
+const empty: V = { name: "", mobile: "", area: "", ward: "", subject: "", description: "", consent: false };
 type Done = { ref: string; at: string; uploadFailed: boolean };
 
 function fileError(f: File | null, types: string[]): "eType" | "eSize" | "" {
@@ -20,7 +20,10 @@ function fileError(f: File | null, types: string[]): "eType" | "eSize" | "" {
 }
 
 export default function ComplaintForm() {
-  const { t, cats, lang } = useI18n();
+  const { t, cats, lang, catLabel } = useI18n();
+  const [cat, setCat] = useState<CategorySlug | "">("");
+  const [q, setQ] = useState("");
+  const [open, setOpen] = useState(false);
   const [v, setV] = useState<V>(empty);
   const [photo, setPhoto] = useState<File | null>(null);
   const [doc, setDoc] = useState<File | null>(null);
@@ -33,14 +36,14 @@ export default function ComplaintForm() {
   const capRef = useRef<HTMLDivElement>(null);
   const capId = useRef<string>();
 
-  const catSlug: CategorySlug | "" = useMemo(() => cats.find((c) => c.label === v.catText.trim())?.slug ?? "", [cats, v.catText]);
+  const filtered = q.trim() ? cats.filter((c) => c.label.toLowerCase().includes(q.trim().toLowerCase())) : cats;
 
   const errs: Record<string, string> = {
     name: v.name.trim().length < 2 ? "eName" : "",
     mobile: MOBILE_RE.test(v.mobile) ? "" : "eMob",
     area: v.area.trim().length < 2 ? "eArea" : "",
     ward: v.ward ? "" : "eWard",
-    cat: catSlug ? "" : "eCat",
+    cat: cat ? "" : "eCat",
     subject: v.subject.trim().length < 3 ? "eSubject" : "",
     description: v.description.trim().length < 10 ? "eDescShort" : "",
     photo: fileError(photo, PHOTO_TYPES),
@@ -66,7 +69,7 @@ export default function ComplaintForm() {
     setBusy(true); setSrvErr("");
     try {
       const res = await fetch("/api/submit-complaint", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
-        name: v.name.trim(), mobile: v.mobile, area: v.area.trim(), ward: v.ward, category: catSlug, subject: v.subject.trim(), description: v.description.trim(),
+        name: v.name.trim(), mobile: v.mobile, area: v.area.trim(), ward: v.ward, category: cat, subject: v.subject.trim(), description: v.description.trim(),
         consent: true, lang, turnstileToken: token, website: "",
         files: [photo && { kind: "photo", name: photo.name, type: photo.type, size: photo.size }, doc && { kind: "doc", name: doc.name, type: doc.type, size: doc.size }].filter(Boolean),
       }) });
@@ -83,7 +86,7 @@ export default function ComplaintForm() {
     } catch { setSrvErr("eServer"); } finally { setBusy(false); }
   }
 
-  function reset() { setV(empty); setPhoto(null); setDoc(null); setTouched({}); setToken(""); setDone(null); setCopied(false); capId.current = undefined; }
+  function reset() { setCat(""); setQ(""); setV(empty); setPhoto(null); setDoc(null); setTouched({}); setToken(""); setDone(null); setCopied(false); capId.current = undefined; }
 
   if (done) {
     return (
@@ -119,8 +122,22 @@ export default function ComplaintForm() {
           </select><E k="ward" /></div>
       </div>
       <label htmlFor="c">{t("lCat")} *</label>
-      <input id="c" list="cats" autoComplete="off" placeholder={t("phCat")} value={v.catText} onChange={(e) => set("catText", e.target.value)} onBlur={() => blur("cat")} />
-      <datalist id="cats">{cats.map((c) => <option key={c.slug} value={c.label} />)}</datalist>
+      <div style={{ position: "relative" }}>
+        <input id="c" role="combobox" aria-expanded={open} aria-controls="catlist" autoComplete="off" placeholder={t("phCat")}
+          value={open ? q : cat ? catLabel(cat) : ""}
+          onFocus={() => { setOpen(true); setQ(""); }}
+          onChange={(e) => { setQ(e.target.value); setOpen(true); }}
+          onBlur={() => { setTimeout(() => { setOpen(false); blur("cat"); }, 150); }} />
+        {open && (
+          <ul id="catlist" role="listbox" className="combo">
+            {filtered.map((c) => (
+              <li key={c.slug} role="option" aria-selected={c.slug === cat}>
+                <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => { setCat(c.slug); setOpen(false); setQ(""); blur("cat"); }}>{c.label}</button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       <p className="hint">{t("catHint")}</p><E k="cat" />
       <label htmlFor="s">{t("lSubject")} *</label>
       <input id="s" maxLength={120} placeholder={t("phSubject")} value={v.subject} onChange={(e) => set("subject", e.target.value)} onBlur={() => blur("subject")} /><E k="subject" />
