@@ -1,0 +1,24 @@
+type D = Record<string, string>;
+export const F: Record<"pa" | "hi" | "en", D> = {
+pa:{lArea:"ਇਲਾਕੇ ਦਾ ਨਾਂ",phArea:"ਆਪਣੇ ਇਲਾਕੇ ਜਾਂ ਮੁਹੱਲੇ ਦਾ ਨਾਂ ਲਿਖੋ",lWard:"ਵਾਰਡ ਨੰਬਰ",selWard:"ਵਾਰਡ ਚੁਣੋ",wardUnknown:"ਮੈਨੂੰ ਨਹੀਂ ਪਤਾ",lSubject:"ਸ਼ਿਕਾਇਤ ਦਾ ਵਿਸ਼ਾ",phSubject:"ਇੱਕ ਲਾਈਨ ਵਿੱਚ ਵਿਸ਼ਾ ਲਿਖੋ",catHint:"ਸੂਚੀ ਵਿੱਚੋਂ ਚੁਣੋ ਜਾਂ ਨਾਂ ਲਿਖ ਕੇ ਲੱਭੋ।",phCat:"ਕਿਸਮ ਲੱਭੋ ਜਾਂ ਚੁਣੋ",
+lPhoto:"ਫੋਟੋ ਅੱਪਲੋਡ ਕਰੋ (ਜ਼ਰੂਰੀ ਨਹੀਂ)",lDoc:"ਸਹਾਇਕ ਦਸਤਾਵੇਜ਼ ਅੱਪਲੋਡ ਕਰੋ (ਜ਼ਰੂਰੀ ਨਹੀਂ)",photoHint:"JPG, JPEG ਜਾਂ PNG। ਵੱਧ ਤੋਂ ਵੱਧ 5 MB।",docHint:"ਸਿਰਫ਼ PDF। ਵੱਧ ਤੋਂ ਵੱਧ 5 MB।",sens:"ਆਧਾਰ ਨੰਬਰ, ਬੈਂਕ ਵੇਰਵੇ ਜਾਂ ਕਿਸੇ ਹੋਰ ਦੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਅੱਪਲੋਡ ਨਾ ਕਰੋ।",
+consent:"ਮੈਂ ਪੁਸ਼ਟੀ ਕਰਦਾ/ਕਰਦੀ ਹਾਂ ਕਿ ਦਿੱਤੀ ਗਈ ਜਾਣਕਾਰੀ ਮੇਰੀ ਜਾਣਕਾਰੀ ਅਨੁਸਾਰ ਸਹੀ ਹੈ ਅਤੇ ਮੈਂ ਆਪਣੀ ਸ਼ਿਕਾਇਤ ਦੀ ਪ੍ਰਕਿਰਿਆ ਲਈ ਆਪਣੀ ਸੰਪਰਕ ਜਾਣਕਾਰੀ ਸਾਂਝੀ ਕਰਨ ਦੀ ਸਹਿਮਤੀ ਦਿੰਦਾ/ਦਿੰਦੀ ਹਾਂ।",privacyLink:"ਪ੍ਰਾਈਵੇਸੀ ਨੀਤੀ ਪੜ੍ਹੋ",
+bSubmit:"ਸ਼ਿਕਾਇਤ ਜਮ੍ਹਾਂ ਕਰੋ",bSubmitting:"ਜਮ੍ਹਾਂ ਹੋ ਰਹੀ ਹੈ...",
+eArea:"ਕਿਰਪਾ ਕਰਕੇ ਇਲਾਕੇ ਦਾ ਨਾਂ ਲਿਖੋ।",eWard:"ਕਿਰਪਾ ਕਰਕੇ ਵਾਰਡ ਚੁਣੋ, ਜਾਂ \"ਮੈਨੂੰ ਨਹੀਂ ਪਤਾ\" ਚੁਣੋ।",eSubject:"ਕਿਰਪਾ ਕਰਕੇ ਸ਼ਿਕਾਇਤ ਦਾ ਵਿਸ਼ਾ ਲਿਖੋ।",eDescShort:"ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ-ਘੱਟ 10 ਅੱਖਰਾਂ ਵਿੱਚ ਸਮੱਸਿਆ ਦੱਸੋ।",eType:"ਇਹ ਫਾਈਲ ਕਿਸਮ ਮਨਜ਼ੂਰ ਨਹੀਂ ਹੈ।",eSize:"ਫਾਈਲ 5 MB ਤੋਂ ਵੱਡੀ ਹੈ।",eConsent:"ਜਮ੍ਹਾਂ ਕਰਨ ਲਈ ਸਹਿਮਤੀ ਜ਼ਰੂਰੀ ਹੈ।",
+eCaptcha:"ਕਿਰਪਾ ਕਰਕੇ ਸੁਰੱਖਿਆ ਜਾਂਚ ਪੂਰੀ ਕਰੋ।",eRate:"ਬਹੁਤ ਜ਼ਿਆਦਾ ਕੋਸ਼ਿਸ਼ਾਂ ਹੋ ਗਈਆਂ ਹਨ। ਕੁਝ ਸਮੇਂ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",eServer:"ਸ਼ਿਕਾਇਤ ਜਮ੍ਹਾਂ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",eUpload:"ਸ਼ਿਕਾਇਤ ਦਰਜ ਹੋ ਗਈ ਹੈ, ਪਰ ਫਾਈਲ ਅੱਪਲੋਡ ਨਹੀਂ ਹੋ ਸਕੀ।",
+okT:"ਤੁਹਾਡੀ ਸ਼ਿਕਾਇਤ ਦਰਜ ਹੋ ਗਈ ਹੈ।",yourRef:"ਤੁਹਾਡੀ ਸ਼ਿਕਾਇਤ ਰੈਫਰੈਂਸ ਆਈਡੀ",saveRef:"ਇਹ ਆਈਡੀ ਸੰਭਾਲ ਕੇ ਰੱਖੋ। ਇਸ ਨਾਲ ਤੁਸੀਂ ਸ਼ਿਕਾਇਤ ਦੀ ਸਥਿਤੀ ਵੇਖ ਸਕੋਗੇ।",copy:"ਆਈਡੀ ਕਾਪੀ ਕਰੋ",copied:"ਕਾਪੀ ਹੋ ਗਈ",again:"ਇੱਕ ਹੋਰ ਸ਼ਿਕਾਇਤ ਦਰਜ ਕਰੋ",at:"ਦਰਜ ਹੋਣ ਦਾ ਸਮਾਂ"},
+hi:{lArea:"इलाके का नाम",phArea:"अपने इलाके या मोहल्ले का नाम लिखें",lWard:"वार्ड नंबर",selWard:"वार्ड चुनें",wardUnknown:"मुझे नहीं पता",lSubject:"शिकायत का विषय",phSubject:"एक पंक्ति में विषय लिखें",catHint:"सूची से चुनें या नाम लिखकर खोजें।",phCat:"श्रेणी खोजें या चुनें",
+lPhoto:"फोटो अपलोड करें (ज़रूरी नहीं)",lDoc:"सहायक दस्तावेज़ अपलोड करें (ज़रूरी नहीं)",photoHint:"JPG, JPEG या PNG। अधिकतम 5 MB।",docHint:"केवल PDF। अधिकतम 5 MB।",sens:"आधार नंबर, बैंक विवरण या किसी और की निजी जानकारी अपलोड न करें।",
+consent:"मैं पुष्टि करता/करती हूँ कि दी गई जानकारी मेरी जानकारी के अनुसार सही है और मैं अपनी शिकायत की प्रक्रिया के लिए अपनी संपर्क जानकारी साझा करने की सहमति देता/देती हूँ।",privacyLink:"गोपनीयता नीति पढ़ें",
+bSubmit:"शिकायत जमा करें",bSubmitting:"जमा हो रही है...",
+eArea:"कृपया इलाके का नाम लिखें।",eWard:"कृपया वार्ड चुनें, या \"मुझे नहीं पता\" चुनें।",eSubject:"कृपया शिकायत का विषय लिखें।",eDescShort:"कृपया कम से कम 10 अक्षरों में समस्या बताएँ।",eType:"यह फाइल प्रकार स्वीकार नहीं है।",eSize:"फाइल 5 MB से बड़ी है।",eConsent:"जमा करने के लिए सहमति ज़रूरी है।",
+eCaptcha:"कृपया सुरक्षा जाँच पूरी करें।",eRate:"बहुत ज़्यादा प्रयास हो गए हैं। कुछ समय बाद फिर कोशिश करें।",eServer:"शिकायत जमा नहीं हो सकी। कृपया दोबारा कोशिश करें।",eUpload:"शिकायत दर्ज हो गई है, लेकिन फाइल अपलोड नहीं हो सकी।",
+okT:"आपकी शिकायत दर्ज हो गई है।",yourRef:"आपकी शिकायत रेफरेंस आईडी",saveRef:"यह आईडी संभालकर रखें। इससे आप शिकायत की स्थिति देख सकेंगे।",copy:"आईडी कॉपी करें",copied:"कॉपी हो गई",again:"एक और शिकायत दर्ज करें",at:"दर्ज होने का समय"},
+en:{lArea:"Area / locality name",phArea:"Enter your area or mohalla name",lWard:"Ward number",selWard:"Select ward",wardUnknown:"I don’t know",lSubject:"Complaint subject",phSubject:"Write the subject in one line",catHint:"Pick from the list or type to search.",phCat:"Search or pick a category",
+lPhoto:"Upload photograph (optional)",lDoc:"Upload supporting document (optional)",photoHint:"JPG, JPEG or PNG. Maximum 5 MB.",docHint:"PDF only. Maximum 5 MB.",sens:"Do not upload Aadhaar numbers, bank details or anyone else’s private information.",
+consent:"I confirm that the information given is correct to the best of my knowledge, and I consent to sharing my contact information so that my complaint can be processed.",privacyLink:"Read the Privacy Policy",
+bSubmit:"Submit complaint",bSubmitting:"Submitting...",
+eArea:"Please enter your area name.",eWard:"Please select a ward, or choose “I don’t know”.",eSubject:"Please enter the complaint subject.",eDescShort:"Please describe the problem in at least 10 characters.",eType:"This file type is not allowed.",eSize:"The file is larger than 5 MB.",eConsent:"Consent is required to submit.",
+eCaptcha:"Please complete the security check.",eRate:"Too many attempts. Please try again after some time.",eServer:"Your complaint could not be submitted. Please try again.",eUpload:"Your complaint is registered, but the file could not be uploaded.",
+okT:"Your complaint has been successfully registered.",yourRef:"Your Complaint Reference ID",saveRef:"Save this ID. You will need it to track your complaint.",copy:"Copy ID",copied:"Copied",again:"Register another complaint",at:"Registered on"}
+};
